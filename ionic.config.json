@@ -1,0 +1,7 @@
+{
+  "name": "app.la-degustation-box.fr",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

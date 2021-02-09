@@ -1,0 +1,25 @@
+{
+    "settings_title": "Paramètres de l'application",
+    "settings_download_title": "Téléchargement des données",
+    "settings_download_button": "Lancer le téléchargement",
+    "settings_download_waiting": "Téléchargement en cours, merci de patienter...",
+    "settings_download_done": "Données synchronisées avec succès",
+    "settings_locale_title": "Langues",
+    "settings_locale_button": "Appliquer",
+    "settings_locale_french": "Français",
+    "settings_delete_title": "Suppression des données",
+
+    "about_l1": "Notre",
+    "about_l2": "Structure",
+
+    "partner_l1": "Nos",
+    "partner_l2": "Valeurs",
+    "partner_page_title": "Nos valeurs",
+
+    "category_l1": "Nos domaines",
+    "category_l2": "d'activités",
+    "btob_title": "La dégustation et l'artisanat au service des professionnels",
+    "btob_button": "Découvrir les offres",
+    "category_page_title": "Familles de produits",
+    "category_page_subtitle": ""
+}

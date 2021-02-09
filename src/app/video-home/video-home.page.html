@@ -1,0 +1,16 @@
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="video">
+    <div class="h-screen bg-black flex justify-center">
+      <video style="height: 93vh;" id="home-video" controls autoplay class="object-cover">
+        <source [src]="video" type="video/mp4">
+       </video>
+    </div>
+    <div class="absolute bottom-0 right-0 left-0 z-50 cursor-pointer" >
+      <div class="bg-gray-900 py-5 flex justify-center items-center text-white" (click)="loadHome()">
+          <p>Passer l'introduction</p>
+      </div>
+  </div>
+</ion-content>

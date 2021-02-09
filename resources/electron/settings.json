@@ -1,0 +1,9 @@
+{
+    "browserWindow": {
+        "resizable": true,
+        "fullscreen": true,
+        "webPreferences": {
+            "nodeIntegration": false
+        }
+    }
+}

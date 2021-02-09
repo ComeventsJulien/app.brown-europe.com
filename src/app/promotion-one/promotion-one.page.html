@@ -1,0 +1,61 @@
+<ion-header [translucent]="true">
+
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="promotion">
+  <div class="min-h-screen bg-black">
+    <div class="container mx-auto flex justify-center items-center h-screen">
+      <div class="grid grid-col-1 xl:grid-cols-2 gap-5 pt-20 ">
+        <a  class="w-auto h-full flex justify-center items-start">
+          <img [src]="promotion.product.resources[0].file" class="w-full object-cover" alt="">
+        </a>
+        <div>
+          <h1 class="tracking-widest font-bold text-3xl text-white uppercase" >{{promotion.product.title}}</h1>
+          
+          <div class="flex">
+            <div class="text-5xl font-bold mb-5 uppercase flex items-baseline  text-white">
+              <div class="flex items-start ">
+                <p class="line-through">{{promotion.product.price}}</p>
+                <p class="text-3xl">€</p>
+              </div>
+              <p class="text-xl">TTC</p>
+            </div>
+            <div class="ml-5 text-5xl font-bold mb-2 uppercase flex items-baseline text-white">
+              <div class="flex items-start">
+                <p>{{ promotion.product.price - (promotion.product.price* (promotion.percentage / 100 ) )| number:'1.0-0'}}</p>
+                <p class="text-3xl">€</p>
+              </div>
+              <p class="text-xl">TTC</p>
+            </div>
+          </div>
+          <h2 class="text-lg text-white text-left mb-5" >Offre valable du {{ promotion.startAt|date:'dd/MM/yyyy'}} au {{ promotion.endAt|date:'dd/MM/yyyy'}}, dans la limite des stocks disponibles</h2>
+
+          <div class="text-white text-lg" [innerHTML]="promotion.product.description"></div>
+        </div>
+      </div>
+    </div>
+    <div class="fixed top-0 left-0 z-50 cursor-pointer">
+      <div class="bg-black h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+    </div>
+      <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+  <ion-back-button class="text-2xl" defaultHref="/home">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+        </ion-back-button>
+    </div>
+    </div>
+    <div class="fixed top-0 right-0 z-50 cursor-pointer" [routerLink]="['/home']">
+        <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+            <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      </div>
+        </div>
+    </div>
+  </div>
+</ion-content>

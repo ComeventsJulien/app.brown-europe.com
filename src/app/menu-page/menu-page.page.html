@@ -1,0 +1,19 @@
+<div class="bg-black h-screen overflow-y-scroll" *ngIf="settings[0]">
+  <h2 class="tracking-widest font-bold text-2xl text-white my-5 text-center uppercase" >MENU</h2>
+  <hr class="border border-or">
+  <div *ngIf="settings[0].promotion" class="m-3 cursor-pointer bg-or p-2 rounded-sm text-center uppercase font-bold" (click)="loadPromotionPage()">
+    Accès aux promotions
+  </div>
+  <hr class="border border-white">
+  <div class="m-3 cursor-pointer  p-2 rounded-sm text-center text-white uppercase font-bold" (click)="loadPartnerCategory(category.id)" *ngFor="let category of partner_categories;">
+    {{ category.title }}
+  </div>
+  <hr class="border border-white">
+  <div class="m-3 cursor-pointer p-2 rounded-sm text-center  text-white uppercase font-bold" (click)="loadCategory(category.id)" *ngFor="let category of categories;">
+    {{ category.title }}
+  </div>
+  <hr class="border border-white">
+  <div class="m-3 cursor-pointer p-2 rounded-sm text-center  text-white uppercase font-bold" (click)="loadSliders()">
+    Fers et métaux
+  </div>
+</div>
