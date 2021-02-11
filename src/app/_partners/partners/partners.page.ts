@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuComponent } from '../../menu/menu.component';
 import { PartnerCategory } from '../../interfaces/partner_category';
 import { LocaleService } from '../../services/locale.service';
-import { TranslateService } from '@ngx-translate/core';
 import { ViewWillEnter } from '@ionic/angular';
 
 @Component({
@@ -13,28 +11,24 @@ import { ViewWillEnter } from '@ionic/angular';
   styleUrls: ['./partners.page.scss'],
 })
 export class PartnersPage implements ViewWillEnter {
-
   categories : Array<PartnerCategory>;
-  partner_page_title: string
-  language: string
-  locale: string
 
-  constructor(private apiService:ApiService, private router: Router, public menu: MenuComponent, private localeService: LocaleService, private _translate: TranslateService) { }
+  constructor(private router: Router, public menu: MenuComponent, private localeService: LocaleService) { }
 
   async ionViewWillEnter() {
-    this.categories = await this.apiService.getLocalData('partner_categories');
-    this.categories.sort(sortWithPosition);
-    
-    function sortWithPosition(a, b) {
+    this.categories = await this.localeService.getPartnerCategories();
+    this.categories.sort((a, b) => {
       if (a.position > b.position) return 1;
       if (b.position > a.position) return -1;
       return 0;
-    }
-    
+    });
+  }
+  
+  async ionViewDidLeave() {
+    this.categories = [];
   }
 
-  loadItem(index:number, title: string){
-    this.router.navigate(['/partner', { category: index, title: title }]);
+  loadItem(id) {
+    this.router.navigate(['/partner', { id: id }]);
   }
-
 }

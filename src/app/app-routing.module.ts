@@ -24,8 +24,8 @@ const routes: Routes = [
     loadChildren: () => import('./_categories/categorie/categorie.module').then( m => m.CategoriePageModule)
   },
   {
-    path: 'categorie-one',
-    loadChildren: () => import('./_categories/categorie-one/categorie-one.module').then( m => m.CategorieOnePageModule)
+    path: 'sub-categorie',
+    loadChildren: () => import('./_categories/sub-categorie/sub-categorie.module').then( m => m.SubCategoriePageModule)
   },
   {
     path: 'menu-page',
@@ -48,16 +48,8 @@ const routes: Routes = [
     loadChildren: () => import('./_partners/partner-one/partner-one.module').then( m => m.PartnerOnePageModule)
   },
   {
-    path: 'promotions',
-    loadChildren: () => import('./promotions/promotions.module').then( m => m.PromotionsPageModule)
-  },
-  {
     path: 'product',
     loadChildren: () => import('./_categories/product/product.module').then( m => m.ProductPageModule)
-  },
-  {
-    path: 'promotion-one',
-    loadChildren: () => import('./promotion-one/promotion-one.module').then( m => m.PromotionOnePageModule)
   },
   {
     path: 'video-home',

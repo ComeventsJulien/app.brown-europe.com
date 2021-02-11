@@ -1,18 +1,14 @@
-<ion-header [translucent]="true">
-
-</ion-header>
-
+<ion-header [translucent]="true"></ion-header>
 <ion-content [fullscreen]="true" *ngIf="item">
   <div class="min-h-screen bg-black flex flex-col justify-center items-center">
     <div class="container mx-auto">
       <h1 class="font-bold text-3xl lg:text-5xl text-white uppercase text-center font-serif mb-5">{{item.title}}</h1>
       <div class="text-lg text-white text-center mb-5" [innerHtml]="item.description"></div>
       <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-        <a *ngFor="let res of item.aboutResources; let i = index" class="w-auto flex justify-center items-center">
-            <img [src]="res.link" class="w-full object-cover" alt="" *ngIf="res.type.name=='IMAGE'">
-            <video controls width="100%" class="w-full h-64 object-cover" *ngIf="res.type.name=='VIDEO'">
-              <source [src]="res.link"
-                    type="video/mp4">
+        <a *ngFor="let res of itemResources" class="w-auto flex justify-center items-center">
+          <img [src]="res.link" class="w-full object-cover" alt="" *ngIf="res.type.name=='IMAGE'">
+          <video controls width="100%" class="w-full h-64 object-cover" *ngIf="res.type.name=='VIDEO'">
+            <source [src]="res.link" type="video/mp4">
           </video>
         </a>
       </div>
@@ -21,24 +17,25 @@
   <div class="fixed top-0 left-0 z-50 cursor-pointer">
     <div class="bg-black h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-  </div>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </div>
     <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
-<ion-back-button class="text-2xl" defaultHref="/home">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-            </svg>
-        </ion-back-button>
-  </div>
+      <ion-back-button class="text-2xl" defaultHref="/home">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+      </ion-back-button>
+    </div>
   </div>
   <div class="fixed top-0 right-0 z-50 cursor-pointer" [routerLink]="['/home']">
+    <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
       <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
-          <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
         </svg>
       </div>
-      </div>
+    </div>
   </div>
 </ion-content>

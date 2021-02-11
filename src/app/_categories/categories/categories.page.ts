@@ -1,10 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuComponent } from '../../menu/menu.component';
 import { ViewWillEnter } from '@ionic/angular';
 import { LocaleService } from '../../services/locale.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-categories',
@@ -12,19 +10,15 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements ViewWillEnter {
-  categories:Array<any> = [];
-  category_page_title: string
-  category_page_subtitle: string
-  language: string
-  locale: string
+  categories: Array<any> = [];
 
-  constructor(private apiService:ApiService, private router: Router, public menu: MenuComponent, private localeService: LocaleService, private _translate: TranslateService) { }
+  constructor(private router: Router, public menu: MenuComponent, private localeService: LocaleService) { }
 
   async ionViewWillEnter() {
-    this.categories = await this.apiService.getLocalData('categories')
+    this.categories = await this.localeService.getCategories();
   }
 
-  loadItem(id:number){
-      this.router.navigate(['/categorie', { category: id }]);
+  loadItem(id) {
+    this.router.navigate(['/categorie', { id: id }]);
   }
 }

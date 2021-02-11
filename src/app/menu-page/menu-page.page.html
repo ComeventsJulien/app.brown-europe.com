@@ -1,19 +1,18 @@
-<div class="bg-black h-screen overflow-y-scroll" *ngIf="settings[0]">
-  <h2 class="tracking-widest font-bold text-2xl text-white my-5 text-center uppercase" >MENU</h2>
+<div class="bg-black h-screen overflow-y-scroll">
+  <h2 class="tracking-widest font-bold text-2xl text-white my-5 text-center uppercase">{{ 'menu_title' | translate }}</h2>
+  <div class="my-5">
+    <div class="cursor-pointer text-white rounded-sm text-center uppercase font-bold my-2" (click)="loadHome()">{{ 'home_title' | translate }}</div>
+    <div class="cursor-pointer text-white rounded-sm text-center uppercase font-bold my-2" (click)="loadAbout()">{{ 'about_l1' | translate }} {{ 'about_l2' | translate }}</div>
+    <div class="cursor-pointer text-white rounded-sm text-center uppercase font-bold my-2" (click)="loadSliders()">{{ 'diapo_title' | translate }}</div>
+  </div>
   <hr class="border border-or">
-  <div *ngIf="settings[0].promotion" class="m-3 cursor-pointer bg-or p-2 rounded-sm text-center uppercase font-bold" (click)="loadPromotionPage()">
-    Accès aux promotions
+  <p _ngcontent-lwd-c25="" class="mb-2 text-or text-xl uppercase text-center font-bold mt-3">{{ 'partner_l1' | translate }} {{ 'partner_l2' | translate }}</p>
+  <div class="m-3 cursor-pointer p-2 rounded-sm text-center text-white uppercase font-bold" (click)="loadPartnerCategory(partnerCategory.id)" *ngFor="let partnerCategory of partnerCategories;">
+    {{ partnerCategory.title }}
   </div>
-  <hr class="border border-white">
-  <div class="m-3 cursor-pointer  p-2 rounded-sm text-center text-white uppercase font-bold" (click)="loadPartnerCategory(category.id)" *ngFor="let category of partner_categories;">
-    {{ category.title }}
-  </div>
-  <hr class="border border-white">
+  <hr class="border border-or">
+  <p _ngcontent-lwd-c25="" class="mb-2 text-or text-xl uppercase text-center font-bold mt-3">{{ 'category_l1' | translate }} {{ 'category_l2' | translate }}</p>
   <div class="m-3 cursor-pointer p-2 rounded-sm text-center  text-white uppercase font-bold" (click)="loadCategory(category.id)" *ngFor="let category of categories;">
     {{ category.title }}
-  </div>
-  <hr class="border border-white">
-  <div class="m-3 cursor-pointer p-2 rounded-sm text-center  text-white uppercase font-bold" (click)="loadSliders()">
-    Fers et métaux
   </div>
 </div>

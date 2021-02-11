@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBase   : 'http://localhost:8000',
+  apiFolder : '/api',
+  uploadFileFolder: '/uploads/images/',
+  storageKey: 'base'
 };
 
 /*

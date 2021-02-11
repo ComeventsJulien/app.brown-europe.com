@@ -1,20 +1,20 @@
 <ion-header [translucent]="true"></ion-header>
-<ion-content [fullscreen]="true" *ngIf="partner">
-  <div class="min-h-screen bg-black">
+<ion-content [fullscreen]="true" *ngIf="subCategory">
+  <div class="min-h-screen bg-black pb-32">
     <div class="container mx-auto py-14">
       <div>
-        <div class="flex items-center pt-10 mb-5">
-          <h1 class="tracking-widest font-bold text-5xl text-white uppercase ">{{ partner.title }}</h1>
-        </div>
+        <h1 class="tracking-widest font-bold text-5xl text-or mb-5 uppercase pt-10">{{subCategory.title}}</h1>
         <hr class="border border-or my-3 mb-8">
-        <div class="flex justify-start w-full mb-8" *ngIf="partner.sound">
-          <audio controls [src]="partner.sound"></audio>
+        <div class="flex justify-start w-full mb-8" *ngIf="subCategory.sound">
+          <audio controls [src]="subCategory.sound"></audio>
         </div>
-        <div class="text-white text-lg" [innerHTML]="partner.description"></div>
+        <div class="text-white text-lg" [innerHTML]="subCategory.description"></div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-        <a *ngFor="let res of partnerResources" class="flex justify-center items-center mt-5">
-          <img [src]="res.link" class="w-auto h-64 object-cover" alt="">
+      <div class="flex flex-wrap justify-center container mx-auto">
+        <a *ngFor="let product of products; let i = index" (click)="loadProduct(product.id)"
+          class="cursor-pointer w-full lg:w-1/4 text-center flex flex-col items-center hover:bg-or hover:text-white  group transition duration-500 ease-in-out">
+          <p class="text-3xl font-serif lg:text-6xl px-2 text-or group-hover:text-white">{{ i+1 }}</p>
+          <p class="text-xs lg:text-xl uppercase mt-1 mb-3 text-white group-hover:text-white">{{ product.title }}</p>
         </a>
       </div>
     </div>

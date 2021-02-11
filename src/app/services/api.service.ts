@@ -1,147 +1,89 @@
-import { OfflineManagerService } from './offline-manager.service';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NetworkService } from './network.service';
-import { Storage } from '@ionic/storage';
 import { Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-
-const API_STORAGE_KEY = 'sirmet';
-const API_URL = 'http://localhost:8000/api/';
+import { environment as env } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
   constructor(
-    private http: HttpClient,
-    private networkService: NetworkService,
-    private storage: Storage,
-    private offlineManager: OfflineManagerService,
+    private http: HttpClient
   ) { }
 
   getResources(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}resources?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('resources', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/resources?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getSettings(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}settings`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('settings', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/settings`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getPromotions(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}promotions?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('promotions', res);
-      })
-    );
-  }
-
-  getAboutResources(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}about_resources?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('about_resources', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/promotions?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getPartnerCategory(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}partner_categories?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('partner_categories', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/partner_categories?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
-  getPartner(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}partners?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('partners', res);
-      })
+  getPartners(forceRefresh: boolean = false): Observable<any[]> {
+    return this.http.get(`${env.apiBase}${env.apiFolder}/partners?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getCategories(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}categories?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('categories', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/categories?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getSubCategories(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}sub_categories?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('sub_categories', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/sub_categories?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getAbout(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}abouts?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('about', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/abouts?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getSliders(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}sliders?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('sliders', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/sliders?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getLocale(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${API_URL}locales?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('locales', res);
-      })
-    );
-  }
-
-  getPartners() {
-    return this.http.get(`${API_URL}partners?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('partners', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/locales?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
   getProducts() {
-    return this.http.get(`${API_URL}products?visible=true`).pipe(
-      map(res => res['hydra:member']),
-      tap(res => {
-        this.setLocalData('products', res);
-      })
+    return this.http.get(`${env.apiBase}${env.apiFolder}/products?visible=true`).pipe(
+      map(res => res['hydra:member'])
     );
   }
 
-  setLocalData(key, data) {
-    this.storage.set(`${API_STORAGE_KEY}-${key}`, data);
-  }
-
-  getLocalData(key) {
-    return this.storage.get(`${API_STORAGE_KEY}-${key}`);
+  getFile(filename: string) {
+    return new Promise((resolve) => {
+      if (!filename) return resolve(null);
+      return this.http.get(env.apiBase + env.uploadFileFolder + '/' + filename, { responseType: 'blob' }).subscribe((blob) => {
+        return resolve(blob);
+      })
+    });
   }
 }

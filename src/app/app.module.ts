@@ -1,4 +1,4 @@
-import {LOCALE_ID, NgModule} from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -24,12 +24,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 registerLocaleData(localeFr);
 
-
 const DEFAULT_SWIPER_CONFIG: SwiperConfigInterface = {
   direction: 'vertical',
   slidesPerView: 'auto'
 };
-
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
@@ -38,23 +36,24 @@ export function HttpLoaderFactory(http: HttpClient) {
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, CommonModule, IonicModule.forRoot(), AppRoutingModule,SwiperModule,
+  imports: [BrowserModule, CommonModule, IonicModule.forRoot(), AppRoutingModule, SwiperModule,
     IonicStorageModule.forRoot({
-    name: '__ldb_db',
-    driverOrder: ['indexeddb','websql','sqlite']
+      name: '__ldb_db',
+      driverOrder: ['indexeddb', 'websql', 'sqlite']
     }),
     TranslateModule.forRoot({
+      defaultLanguage : 'fr',
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
     }),
-  HttpClientModule,
-  ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
+    HttpClientModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })],
   providers: [
     StatusBar,
-    { provide: LOCALE_ID, useValue: 'fr-FR'},
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     SplashScreen,
     Network,
     MenuComponent,
@@ -66,4 +65,4 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

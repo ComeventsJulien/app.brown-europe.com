@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { MenuPagePage } from '../menu-page/menu-page.page';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-
   constructor(public modalController: ModalController) {
-
   }
 
   ngOnInit(): void {
@@ -28,5 +27,4 @@ export class MenuComponent implements OnInit {
       'dismissed': true
     });
   }
-
 }

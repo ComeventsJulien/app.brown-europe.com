@@ -81,15 +81,18 @@ export class SlidersPage implements ViewWillEnter {
     }
   }
 
-  constructor(private apiService: ApiService, public menu: MenuComponent, private sanitizer:DomSanitizer, private localeService: LocaleService, private _translate: TranslateService) {
+  constructor(public menu: MenuComponent, private sanitizer:DomSanitizer, private localeService: LocaleService) {
   }
 
   async ionViewWillEnter() {
-    this.sliders = await this.apiService.getLocalData('sliders');
+    this.sliders = await this.localeService.getSliders();
     for (let slider of this.sliders) {
       slider.image = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(slider.image));
-      console.log(slider.image);
     }
+  }
+
+  async ionViewDidLeave() {
+    this.sliders = [];
   }
 
   async slideNext(): Promise<void> {

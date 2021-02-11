@@ -1,20 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { CategorieOnePageRoutingModule } from './categorie-one-routing.module';
-
-import { CategorieOnePage } from './categorie-one.page';
+import { SubCategoriePageRoutingModule } from './sub-categorie-routing.module';
+import { SubCategoriePage } from './sub-categorie.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    CategorieOnePageRoutingModule
+    SubCategoriePageRoutingModule
   ],
-  declarations: [CategorieOnePage]
+  declarations: [SubCategoriePage]
 })
-export class CategorieOnePageModule {}
+export class SubCategoriePageModule {}

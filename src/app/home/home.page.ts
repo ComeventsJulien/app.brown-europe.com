@@ -4,7 +4,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { LocaleService } from '../services/locale.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '../services/api.service';
-import { ViewWillEnter, AlertController, ViewDidEnter } from '@ionic/angular';
+import { AlertController, ViewDidEnter } from '@ionic/angular';
 import { NetworkService } from '../services/network.service';
 
 @Component({
@@ -13,13 +13,6 @@ import { NetworkService } from '../services/network.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements ViewDidEnter {
-  about_l1: string
-  about_l2: string
-  partner_l1: string
-  partner_l2: string
-  category_l1: string
-  category_l2: string
-  language: string
   locale: string
   locales: any;
 
@@ -38,13 +31,13 @@ export class HomePage implements ViewDidEnter {
       this.presentAlertConfirm()
     }
 
-    this._translateLanguage()
+    this._translate.use(this.locale);
 
-    if (await this.apiService.getLocalData('locales')) {
-      this.locales = await this.apiService.getLocalData('locales')
+    if (await this.localeService.getLocalData('locales')) {
+      this.locales = await this.localeService.getLocalData('locales')
     }
 
-    let testData = await this.apiService.getLocalData('resources')
+    let testData = await this.localeService.getLocalData('resources')
     if (testData == null) {
       this.presentAlertConfirm();
     }
@@ -68,35 +61,9 @@ export class HomePage implements ViewDidEnter {
     await alert.present();
   }
 
-  _initialiseTranslation(): void {
-    this._translate.get('about_l1').subscribe((res: string) => {
-      this.about_l1 = res;
-    });
-    this._translate.get('about_l2').subscribe((res: string) => {
-      this.about_l2 = res;
-    });
-    this._translate.get('partner_l1').subscribe((res: string) => {
-      this.partner_l1 = res;
-    });
-    this._translate.get('partner_l2').subscribe((res: string) => {
-      this.partner_l2 = res;
-    });
-    this._translate.get('category_l1').subscribe((res: string) => {
-      this.category_l1 = res;
-    });
-    this._translate.get('category_l2').subscribe((res: string) => {
-      this.category_l2 = res;
-    });
-  }
-
-  async _translateLanguage() {
-    this._translate.use(this.locale);
-    this._initialiseTranslation();
-  }
-
   setLocale(code: string) {
     this.localeService.setLocalData('locale', code);
     this.locale = code;
-    this._translateLanguage()
+    this._translate.use(this.locale);
   }
 }

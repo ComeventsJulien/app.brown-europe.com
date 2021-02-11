@@ -17,6 +17,22 @@ Pour lancer le serveur Ionic 5 :
 $ ionic serve
 ```
 
+### Configuration
+
+Pour modifier tous les paramètres de base de l'application aller dans le fichier
+environnments/environnment.ts
+```
+export const environment = {
+  production: false,
+  apiBase   : 'http://localhost:8000',
+  apiFolder : '/api',
+  uploadFileFolder: '/uploads/images/',
+  storageKey: 'base'
+};
+```
+
+### Installation en mode de production prod
+
 Les configurations des différents textes se trouvent dans ```src/assets/i18n/``` et le langage correspondant : fr.json ou en.json, suivant le multilangage souhaité.
 
 Pour lancer la compilation du projet :
