@@ -13,6 +13,7 @@ import { MenuComponent } from '../menu/menu.component';
 })
 export class SlidersPage implements ViewWillEnter {
   @ViewChild (IonSlides) protected slider: IonSlides;
+  title = '';
   sliders:Array<any> = [];
   slideOpts = {
     direction: 'horizontal',
@@ -85,6 +86,7 @@ export class SlidersPage implements ViewWillEnter {
   }
 
   async ionViewWillEnter() {
+    this.title = await this.localeService.getGUIText('APP_SLIDERS_TITLE');
     this.sliders = await this.localeService.getSliders();
     for (let slider of this.sliders) {
       slider.image = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(slider.image));

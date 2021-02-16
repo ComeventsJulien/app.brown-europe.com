@@ -24,8 +24,8 @@ export class ApiService {
     );
   }
 
-  getPromotions(forceRefresh: boolean = false): Observable<any[]> {
-    return this.http.get(`${env.apiBase}${env.apiFolder}/promotions?visible=true`).pipe(
+  getGUI(forceRefresh: boolean = false): Observable<any[]> {
+    return this.http.get(`${env.apiBase}${env.apiFolder}/guis?visible=true`).pipe(
       map(res => res['hydra:member'])
     );
   }

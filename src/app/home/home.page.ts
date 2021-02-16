@@ -3,9 +3,7 @@ import { Router } from '@angular/router';
 import { MenuComponent } from '../menu/menu.component';
 import { LocaleService } from '../services/locale.service';
 import { TranslateService } from '@ngx-translate/core';
-import { ApiService } from '../services/api.service';
 import { AlertController, ViewDidEnter } from '@ionic/angular';
-import { NetworkService } from '../services/network.service';
 
 @Component({
   selector: 'app-home',
@@ -13,33 +11,37 @@ import { NetworkService } from '../services/network.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements ViewDidEnter {
-  locale: string
-  locales: any;
+  partners_l1: string = '';
+  partners_l2: string = '';
+  about_l1: string = '';
+  about_l2: string = '';
+  categories_l1: string = '';
+  categories_l2: string = '';
+  locales: any = [];
 
-  constructor(private router: Router, public menu: MenuComponent, private networkService: NetworkService, private localeService: LocaleService, private _translate: TranslateService, private apiService: ApiService, public alertController: AlertController) { }
+  constructor(private router: Router, public menu: MenuComponent, private localeService: LocaleService, private _translate: TranslateService, public alertController: AlertController) { }
 
   async ionViewDidEnter() {
-    if (await this.localeService.getLocalData('locale')) {
-      this.locale = await this.localeService.getLocalData('locale');
+    if (await this.localeService.getLocale()) {
+      this._translate.use(await this.localeService.getLocale());
     }
     else {
-      this.locale = 'fr';
-      this.localeService.setLocalData('locale', 'fr');
-    }
-
-    if (this.networkService.getCurrentNetworkStatus() !== 0) {
-      this.presentAlertConfirm()
-    }
-
-    this._translate.use(this.locale);
-
-    if (await this.localeService.getLocalData('locales')) {
-      this.locales = await this.localeService.getLocalData('locales')
+      await this.localeService.setLocalData('locale', 'fr');
+      this._translate.use('fr');
     }
 
     let testData = await this.localeService.getLocalData('resources')
     if (testData == null) {
       this.presentAlertConfirm();
+    }
+    else {
+      this.partners_l1 = await this.localeService.getGUIText('APP_PARTNERS_L1');
+      this.partners_l2 = await this.localeService.getGUIText('APP_PARTNERS_L2');
+      this.about_l1 = await this.localeService.getGUIText('APP_ABOUT_L1');
+      this.about_l2 = await this.localeService.getGUIText('APP_ABOUT_L2');
+      this.categories_l1 = await this.localeService.getGUIText('APP_CATEGORIES_L1');
+      this.categories_l2 = await this.localeService.getGUIText('APP_CATEGORIES_L2');
+      this.locales = await this.localeService.getLocales();
     }
   }
 
@@ -61,9 +63,14 @@ export class HomePage implements ViewDidEnter {
     await alert.present();
   }
 
-  setLocale(code: string) {
-    this.localeService.setLocalData('locale', code);
-    this.locale = code;
-    this._translate.use(this.locale);
+  async setLanguage(code: string) {
+    await this.localeService.setLocalData('locale', code);
+    this.partners_l1 = await this.localeService.getGUIText('APP_PARTNERS_L1');
+    this.partners_l2 = await this.localeService.getGUIText('APP_PARTNERS_L2');
+    this.about_l1 = await this.localeService.getGUIText('APP_ABOUT_L1');
+    this.about_l2 = await this.localeService.getGUIText('APP_ABOUT_L2');
+    this.categories_l1 = await this.localeService.getGUIText('APP_CATEGORIES_L1');
+    this.categories_l2 = await this.localeService.getGUIText('APP_CATEGORIES_L2');
+    this._translate.use(code);
   }
 }

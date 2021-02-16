@@ -11,11 +11,13 @@ import { ViewWillEnter } from '@ionic/angular';
   styleUrls: ['./partners.page.scss'],
 })
 export class PartnersPage implements ViewWillEnter {
+  title = '';
   categories : Array<PartnerCategory>;
 
   constructor(private router: Router, public menu: MenuComponent, private localeService: LocaleService) { }
 
   async ionViewWillEnter() {
+    this.title = await this.localeService.getGUIText('APP_PARTNERS_TITLE');
     this.categories = await this.localeService.getPartnerCategories();
     this.categories.sort((a, b) => {
       if (a.position > b.position) return 1;

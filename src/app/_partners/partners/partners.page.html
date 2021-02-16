@@ -3,7 +3,7 @@
   <div class="min-h-screen bg-black flex flex-col justify-center items-center">
     <div class="flex flex-col items-center justify-center">
       <img src="" class="pb-5 pr-2 z-10 hidden lg:block lg:w-32 h-auto" alt="">
-      <h1 class="tracking-widest font-bold text-3xl lg:text-5xl text-white uppercase text-center">{{ 'partner_l1' | translate }} {{ 'partner_l2' | translate }}</h1>
+      <h1 class="tracking-widest font-bold text-3xl lg:text-5xl text-white uppercase text-center">{{ title }}</h1>
     </div>
     <div class="mt-5 container mx-auto flex flex-wrap justify-center z-50">
       <a *ngFor="let category of categories; let i = index" (click)="loadItem(category.id)"
