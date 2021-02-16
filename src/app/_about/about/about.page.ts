@@ -10,11 +10,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements ViewWillEnter {
+  title = '';
   about = [];
 
   constructor(public menu: MenuComponent, private router: Router, private localeService: LocaleService) { }
-  
+
   async ionViewWillEnter() {
+    this.title = await this.localeService.getGUIText('APP_ABOUT_TITLE');
     this.about = await this.localeService.getAbout();
   }
 

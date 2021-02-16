@@ -19,6 +19,10 @@ export class LocaleService {
         await this.setLocalData('about', data);
       });
 
+      this.apiService.getGUI().subscribe(async (data) => {
+        await this.setLocalData('guis', data);
+      });
+
       this.apiService.getPartnerCategory().subscribe(async (data) => {
         for (let item of data) item['image'] = await this.apiService.getFile(item['image']);
         for (let item of data) item['sound'] = await this.apiService.getFile(item['sound']);
@@ -58,10 +62,6 @@ export class LocaleService {
         await this.setLocalData('locales', data);
       });
 
-      this.apiService.getPromotions().subscribe(async (data) => {
-        await this.setLocalData('promotions', data);
-      });
-
       this.apiService.getResources().subscribe(async (data) => {
         for (let item of data) item['link'] = await this.apiService.getFile(item['link']);
         await this.setLocalData('resources', data);
@@ -82,8 +82,12 @@ export class LocaleService {
     return await this.storage.clear();
   }
 
+  async getLocales() {
+    return await this.getLocalData('locales');
+  }
+
   async getLocale() {
-    return this.getLocalData('locale');
+    return await this.getLocalData('locale');
   }
 
   async getAbout() {
@@ -258,5 +262,32 @@ export class LocaleService {
 
   async getSliders() {
     return await this.getLocalData('sliders');
+  }
+
+  async getGUIS() {
+    let locale = await this.getLocale();
+    let guis = await this.getLocalData('guis');
+
+    if (locale != 'fr') {
+      guis = guis.map(item => {
+        let index = item.translations.findIndex(translate => translate.locale.code == locale);
+        return Object.assign(item, item.translations[index]);
+      });
+    }
+
+    return guis;
+  }
+
+  async getGUIText(name) {
+    let locale = await this.getLocale();
+    let guis = await this.getLocalData('guis');
+    let gui = guis[guis.findIndex(item => item.name == name)];
+
+    if (locale != 'fr') {
+      let index = gui.guiTranslates.findIndex(translate => translate.locale.code == locale);
+      gui = Object.assign(gui, gui.guiTranslates[index]);
+    }
+
+    return gui.text;
   }
 }

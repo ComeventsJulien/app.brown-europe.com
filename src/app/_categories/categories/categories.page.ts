@@ -10,11 +10,13 @@ import { LocaleService } from '../../services/locale.service';
   styleUrls: ['./categories.page.scss'],
 })
 export class CategoriesPage implements ViewWillEnter {
+  title = '';
   categories: Array<any> = [];
 
   constructor(private router: Router, public menu: MenuComponent, private localeService: LocaleService) { }
 
   async ionViewWillEnter() {
+    this.title = await this.localeService.getGUIText('APP_CATEGORIES_TITLE');
     this.categories = await this.localeService.getCategories();
   }
 
