@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuComponent } from '../../menu/menu.component';
-import { LocaleService } from '../../services/locale.service';
+import { DataService } from '../../services/data.service';
 import { ViewWillEnter } from '@ionic/angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -11,16 +11,18 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./partner.page.scss'],
 })
 export class PartnerPage implements ViewWillEnter {
+  settings = {};
   partnerCategory: any;
   partners = [];
 
-  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, public menu: MenuComponent, private localeService: LocaleService) { }
+  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private router: Router, public menu: MenuComponent, private dataService: DataService) { }
 
   async ionViewWillEnter() {
     this.partners = [];
-    this.partnerCategory = await this.localeService.getPartnerCategoryOne(this.route.snapshot.paramMap.get('id'));
+    this.settings = await this.dataService.getSettings();
+    this.partnerCategory = await this.dataService.getPartnerCategoryOne(this.route.snapshot.paramMap.get('id'));
     this.partnerCategory.partners.forEach(async (partner) => {
-      this.partners.push(await this.localeService.getPartnerOne(partner.id));
+      this.partners.push(await this.dataService.getPartnerOne(partner.id));
     });
 
     if (this.partnerCategory.image) {

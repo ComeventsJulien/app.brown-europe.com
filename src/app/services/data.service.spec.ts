@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LocaleService } from './locale.service';
+import { DataService } from './data.service';
 
-describe('LocaleService', () => {
-  let service: LocaleService;
+describe('DataService', () => {
+  let service: DataService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LocaleService);
+    service = TestBed.inject(DataService);
   });
 
   it('should be created', () => {

@@ -19,13 +19,7 @@ module.exports = {
       width:{
         'home' : "20rem",
         'metiers' : "36rem",
-        'cube' : "30rem",
-        'coq-grand' : "30rem",
-        'coq-petit' : "15rem",
-      },
-      colors:{
-        'or': "#bc0f1a",
-        'black' : "#3c3a3b"
+        'cube' : "30rem"
       }
     },
   },

@@ -1,8 +1,8 @@
 <ion-header [translucent]="true"></ion-header>
 <ion-content [fullscreen]="true" *ngIf="category">
-  <div class="min-h-screen bg-black flex flex-col justify-center items-center">
+  <div class="min-h-screen bg-{{ settings['secondaryColor'] }} flex flex-col justify-center items-center">
     <div class="flex flex-col items-center justify-center container mx-auto text-center">
-      <h1 class="font-bold text-3xl lg:text-5xl uppercase text-center font-serif text-or">{{ category.title }}</h1>
+      <h1 class="font-bold text-3xl lg:text-5xl uppercase text-center font-serif text-{{ settings['primaryColor'] }}">{{ category.title }}</h1>
       <div class="text-lg lg:text-2xl text-white text-center" [innerHtml]="category.description"></div>
       <div class="mt-5" *ngIf="category.sound">
         <audio controls [src]="category.sound" id="audio"></audio>
@@ -10,19 +10,19 @@
     </div>
     <div class="flex flex-wrap justify-center mt-10 container mx-auto">
       <a *ngFor="let subcategory of subCategories; let i = index" (click)="loadItem(subcategory.id)"
-        class="cursor-pointer px-2 w-full lg:w-1/4 text-center  flex flex-col items-center hover:bg-or hover:text-white group transition duration-500 ease-in-out">
-        <p class="text-3xl font-serif lg:text-6xl px-2 text-or group-hover:text-white">{{ i+1 }}</p>
+        class="cursor-pointer px-2 w-full lg:w-1/4 text-center  flex flex-col items-center hover:bg-{{ settings['primaryColor'] }} hover:text-white group transition duration-500 ease-in-out">
+        <p class="text-3xl font-serif lg:text-6xl px-2 text-{{ settings['primaryColor'] }} group-hover:text-white">{{ i+1 }}</p>
         <p class="text-lg uppercase mt-1 mb-3 text-white group-hover:text-white">{{ subcategory.title }}</p>
       </a>
     </div>
   </div>
   <div class="absolute top-0 left-0 z-50 cursor-pointer">
-    <div class="bg-black h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
+    <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </div>
-    <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+    <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
       <ion-back-button class="text-2xl" defaultHref="/home">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -31,8 +31,8 @@
     </div>
   </div>
   <div class="fixed top-0 right-0 z-50 cursor-pointer" [routerLink]="['/home']">
-    <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
-      <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+    <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
+      <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />

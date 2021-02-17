@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
 import { MenuComponent } from '../../menu/menu.component';
-import { LocaleService } from '../../services/locale.service';
+import { DataService } from '../../services/data.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,14 +10,18 @@ import { Router } from '@angular/router';
   styleUrls: ['./about.page.scss'],
 })
 export class AboutPage implements ViewWillEnter {
+  settings = {};
   title = '';
+  slidersTitle = '';
   about = [];
 
-  constructor(public menu: MenuComponent, private router: Router, private localeService: LocaleService) { }
+  constructor(public menu: MenuComponent, private router: Router, private dataService: DataService) { }
 
   async ionViewWillEnter() {
-    this.title = await this.localeService.getGUIText('APP_ABOUT_TITLE');
-    this.about = await this.localeService.getAbout();
+    this.settings = await this.dataService.getSettings();
+    this.title = await this.dataService.getGUIText('APP_ABOUT_TITLE');
+    this.slidersTitle = await this.dataService.getGUIText('APP_SLIDERS_TITLE');
+    this.about = await this.dataService.getAbout();
   }
 
   async ionViewDidLeave() {

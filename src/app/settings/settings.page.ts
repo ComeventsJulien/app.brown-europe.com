@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ViewWillEnter } from '@ionic/angular';
-import { Locale } from '../interfaces/locale';
-import { LocaleService } from '../services/locale.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-settings',
@@ -9,23 +8,22 @@ import { LocaleService } from '../services/locale.service';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements ViewWillEnter {
-  blob: BlobPart;
-  locales: Array<Locale>;
-  locale: string;
   state: string = 'IDLE';
 
   constructor(
-    private localeService: LocaleService,
+    private dataService: DataService
   ) { }
 
   async ionViewWillEnter() { }
 
   async loadDataApi() {
     this.state = 'WAITING';
-    await this.localeService.loadFromAPI().then(() => this.state = 'DONE');
+    await this.dataService.loadFromAPI().then(async () => {
+      this.state = 'DONE'
+    });
   }
 
   async deleteLocalData() {
-    await this.localeService.clear();
+    await this.dataService.clear();
   }
 }

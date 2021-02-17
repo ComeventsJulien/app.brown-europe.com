@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuComponent } from '../menu/menu.component';
-import { LocaleService } from '../services/locale.service';
+import { DataService } from '../services/data.service';
+import { ColorService } from '../services/color.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertController, ViewDidEnter } from '@ionic/angular';
 
@@ -18,30 +19,23 @@ export class HomePage implements ViewDidEnter {
   categories_l1: string = '';
   categories_l2: string = '';
   locales: any = [];
+  settings: any = {};
 
-  constructor(private router: Router, public menu: MenuComponent, private localeService: LocaleService, private _translate: TranslateService, public alertController: AlertController) { }
+  constructor(private router: Router, public menu: MenuComponent, private dataService: DataService, private _translate: TranslateService, public alertController: AlertController, public colorService: ColorService) { }
 
   async ionViewDidEnter() {
-    if (await this.localeService.getLocale()) {
-      this._translate.use(await this.localeService.getLocale());
-    }
-    else {
-      await this.localeService.setLocalData('locale', 'fr');
-      this._translate.use('fr');
-    }
-
-    let testData = await this.localeService.getLocalData('resources')
-    if (testData == null) {
+    if (await this.dataService.getLocalData('resources') == null) {
       this.presentAlertConfirm();
     }
     else {
-      this.partners_l1 = await this.localeService.getGUIText('APP_PARTNERS_L1');
-      this.partners_l2 = await this.localeService.getGUIText('APP_PARTNERS_L2');
-      this.about_l1 = await this.localeService.getGUIText('APP_ABOUT_L1');
-      this.about_l2 = await this.localeService.getGUIText('APP_ABOUT_L2');
-      this.categories_l1 = await this.localeService.getGUIText('APP_CATEGORIES_L1');
-      this.categories_l2 = await this.localeService.getGUIText('APP_CATEGORIES_L2');
-      this.locales = await this.localeService.getLocales();
+      this.partners_l1 = await this.dataService.getGUIText('APP_PARTNERS_L1');
+      this.partners_l2 = await this.dataService.getGUIText('APP_PARTNERS_L2');
+      this.about_l1 = await this.dataService.getGUIText('APP_ABOUT_L1');
+      this.about_l2 = await this.dataService.getGUIText('APP_ABOUT_L2');
+      this.categories_l1 = await this.dataService.getGUIText('APP_CATEGORIES_L1');
+      this.categories_l2 = await this.dataService.getGUIText('APP_CATEGORIES_L2');
+      this.locales = await this.dataService.getLocales();
+      this.settings = await this.dataService.getSettings();
     }
   }
 
@@ -64,13 +58,13 @@ export class HomePage implements ViewDidEnter {
   }
 
   async setLanguage(code: string) {
-    await this.localeService.setLocalData('locale', code);
-    this.partners_l1 = await this.localeService.getGUIText('APP_PARTNERS_L1');
-    this.partners_l2 = await this.localeService.getGUIText('APP_PARTNERS_L2');
-    this.about_l1 = await this.localeService.getGUIText('APP_ABOUT_L1');
-    this.about_l2 = await this.localeService.getGUIText('APP_ABOUT_L2');
-    this.categories_l1 = await this.localeService.getGUIText('APP_CATEGORIES_L1');
-    this.categories_l2 = await this.localeService.getGUIText('APP_CATEGORIES_L2');
     this._translate.use(code);
+    await this.dataService.setCurrentLanguage(code);
+    this.partners_l1 = await this.dataService.getGUIText('APP_PARTNERS_L1');
+    this.partners_l2 = await this.dataService.getGUIText('APP_PARTNERS_L2');
+    this.about_l1 = await this.dataService.getGUIText('APP_ABOUT_L1');
+    this.about_l2 = await this.dataService.getGUIText('APP_ABOUT_L2');
+    this.categories_l1 = await this.dataService.getGUIText('APP_CATEGORIES_L1');
+    this.categories_l2 = await this.dataService.getGUIText('APP_CATEGORIES_L2');    
   }
 }

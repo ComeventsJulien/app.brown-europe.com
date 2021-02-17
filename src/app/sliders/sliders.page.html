@@ -3,28 +3,28 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-slides #slider class="h-screen bg-black" pager="true" [options]="slideOpts">
-    <ion-slide class="bg-black flex justify-center flex-col w-full" *ngFor="let slider of sliders">
+  <ion-slides #slider class="h-screen bg-{{ settings['secondaryColor'] }}" pager="true" [options]="slideOpts">
+    <ion-slide class="bg-{{ settings['secondaryColor'] }} flex justify-center flex-col w-full" *ngFor="let slider of sliders">
       <img [src]="slider.image" alt="{{slider.title}}" class="w-full">
     </ion-slide>
   </ion-slides>
   <div
-    class="absolute left-0 bottom-0 bg-black h-12 cursor-pointer w-12 -mt-6 flex justify-center items-center text-white z-50"
+    class="absolute left-0 bottom-0 bg-{{ settings['secondaryColor'] }} h-12 cursor-pointer w-12 -mt-6 flex justify-center items-center text-white z-50"
     style="top:50%; z-index:9999999" (click)="slidePrev()">
     <ion-icon icon="chevron-back-outline" class="text-3xl"></ion-icon>
   </div>
   <div
-    class="absolute right-0 bottom-0 bg-black h-12 cursor-pointer w-12 -mt-6 flex justify-center items-center text-white z-50"
+    class="absolute right-0 bottom-0 bg-{{ settings['secondaryColor'] }} h-12 cursor-pointer w-12 -mt-6 flex justify-center items-center text-white z-50"
     style="top:50%; z-index:9999999" (click)="slideNext()">
     <ion-icon icon="chevron-forward-outline" class="text-3xl"></ion-icon>
   </div>
   <div class="fixed top-0 left-0 z-50 cursor-pointer">
-    <div class="bg-black h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
+    <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </div>
-    <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+    <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
       <ion-back-button class="text-2xl" defaultHref="/home">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
@@ -33,8 +33,8 @@
     </div>
   </div>
   <div class="fixed top-0 right-0 z-50 cursor-pointer" [routerLink]="['/home']">
-    <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
-      <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+    <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
+      <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
             d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />

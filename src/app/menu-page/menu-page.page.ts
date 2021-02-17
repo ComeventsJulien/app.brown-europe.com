@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { LocaleService } from '../services/locale.service';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-menu-page',
@@ -9,6 +9,7 @@ import { LocaleService } from '../services/locale.service';
   styleUrls: ['./menu-page.page.scss'],
 })
 export class MenuPagePage implements OnInit {
+  settings = {};
   title = '';
   homeTitle = '';
   aboutTitle = '';
@@ -18,18 +19,18 @@ export class MenuPagePage implements OnInit {
   partnerCategories: Array<any> = [];
   categories: Array<any> = [];
 
-  constructor(private router: Router, public menu: ModalController, private localeService: LocaleService) { }
+  constructor(private router: Router, public menu: ModalController, private dataService: DataService) { }
 
   async ngOnInit() {
-    console.log('test');
-    this.title = await this.localeService.getGUIText('APP_MENU_TITLE');
-    this.homeTitle = await this.localeService.getGUIText('APP_HOME_TITLE');
-    this.aboutTitle = await this.localeService.getGUIText('APP_ABOUT_TITLE');
-    this.partnersTitle = await this.localeService.getGUIText('APP_PARTNERS_TITLE');
-    this.categoriesTitle = await this.localeService.getGUIText('APP_CATEGORIES_TITLE');
-    this.slidersTitle = await this.localeService.getGUIText('APP_SLIDERS_TITLE');
-    this.partnerCategories = await this.localeService.getPartnerCategories();
-    this.categories = await this.localeService.getCategories();
+    this.settings = await this.dataService.getSettings();
+    this.title = await this.dataService.getGUIText('APP_MENU_TITLE');
+    this.homeTitle = await this.dataService.getGUIText('APP_HOME_TITLE');
+    this.aboutTitle = await this.dataService.getGUIText('APP_ABOUT_TITLE');
+    this.partnersTitle = await this.dataService.getGUIText('APP_PARTNERS_TITLE');
+    this.categoriesTitle = await this.dataService.getGUIText('APP_CATEGORIES_TITLE');
+    this.slidersTitle = await this.dataService.getGUIText('APP_SLIDERS_TITLE');
+    this.partnerCategories = await this.dataService.getPartnerCategories();
+    this.categories = await this.dataService.getCategories();
   }
 
   loadPartnerCategory(id) {

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MenuComponent } from '../../menu/menu.component';
 import { DomSanitizer } from '@angular/platform-browser';
-import { LocaleService } from '../../services/locale.service';
+import { DataService } from '../../services/data.service';
 import { ViewWillEnter } from '@ionic/angular';
 
 @Component({
@@ -10,16 +11,18 @@ import { ViewWillEnter } from '@ionic/angular';
   styleUrls: ['./partner-one.page.scss'],
 })
 export class PartnerOnePage implements ViewWillEnter {
+  settings = {};
   partner: any = null;
   partnerResources: any[] = [];
 
-  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private localeService: LocaleService) { }
+  constructor(private route: ActivatedRoute, private sanitizer: DomSanitizer, private dataService: DataService, public menu: MenuComponent) { }
 
   async ionViewWillEnter() {
     this.partnerResources = [];
-    this.partner = await this.localeService.getPartnerOne(this.route.snapshot.paramMap.get('id'));
+    this.settings = await this.dataService.getSettings();
+    this.partner = await this.dataService.getPartnerOne(this.route.snapshot.paramMap.get('id'));
     this.partner.resources.forEach(async (element) => {
-      let resource = await this.localeService.getResourceOne(element.id);
+      let resource = await this.dataService.getResourceOne(element.id);
       resource.link = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(resource.link));
       this.partnerResources.push(resource);
     });

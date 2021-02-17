@@ -3,7 +3,7 @@ import { MenuComponent } from '../../menu/menu.component';
 import { ViewDidEnter } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
-import { LocaleService } from '../../services/locale.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-sub-categorie',
@@ -11,16 +11,18 @@ import { LocaleService } from '../../services/locale.service';
   styleUrls: ['./sub-categorie.page.scss'],
 })
 export class SubCategoriePage implements ViewDidEnter {
+  settings = {};
   subCategory: any;
   products = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer, public menu: MenuComponent, private localeService: LocaleService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private sanitizer: DomSanitizer, public menu: MenuComponent, private dataService: DataService) { }
 
   async ionViewDidEnter() {
     this.products = [];
-    this.subCategory = await this.localeService.getSubCategoryOne(this.route.snapshot.paramMap.get('id'));
+    this.settings = await this.dataService.getSettings();
+    this.subCategory = await this.dataService.getSubCategoryOne(this.route.snapshot.paramMap.get('id'));
     this.subCategory.products.forEach(async (product) => {
-      this.products.push(await this.localeService.getProductOne(product.id));
+      this.products.push(await this.dataService.getProductOne(product.id));
     });
 
     if (this.subCategory.sound) {

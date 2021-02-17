@@ -1,17 +1,17 @@
-<div class="bg-black h-screen overflow-y-scroll">
-  <h2 class="tracking-widest font-bold text-2xl text-white my-5 text-center uppercase">{{ title }}</h2>
+<div class="bg-{{ settings['secondaryColor'] }} h-screen overflow-y-scroll">
+  <h2 class="tracking-widest font-bold text-2xl my-5 p-3 text-center uppercase bg-{{ settings['primaryColor'] }} text-{{ settings['secondaryColor'] }}">{{ title }}</h2>
   <div class="my-5">
     <div class="cursor-pointer text-white rounded-sm text-center uppercase font-bold my-2" (click)="loadHome()">{{ homeTitle }}</div>
     <div class="cursor-pointer text-white rounded-sm text-center uppercase font-bold my-2" (click)="loadAbout()">{{ aboutTitle }}</div>
     <div class="cursor-pointer text-white rounded-sm text-center uppercase font-bold my-2" (click)="loadSliders()">{{ slidersTitle }}</div>
   </div>
   <hr class="border border-or">
-  <p _ngcontent-lwd-c25="" class="mb-2 text-or text-xl uppercase text-center font-bold mt-3">{{ partnersTitle }}</p>
+  <p _ngcontent-lwd-c25="" class="mb-2 text-{{ settings['primaryColor'] }} text-xl uppercase text-center font-bold mt-3">{{ partnersTitle }}</p>
   <div class="m-3 cursor-pointer p-2 rounded-sm text-center text-white uppercase font-bold" (click)="loadPartnerCategory(partnerCategory.id)" *ngFor="let partnerCategory of partnerCategories;">
     {{ partnerCategory.title }}
   </div>
   <hr class="border border-or">
-  <p _ngcontent-lwd-c25="" class="mb-2 text-or text-xl uppercase text-center font-bold mt-3">{{ categoriesTitle }}</p>
+  <p _ngcontent-lwd-c25="" class="mb-2 text-{{ settings['primaryColor'] }} text-xl uppercase text-center font-bold mt-3">{{ categoriesTitle }}</p>
   <div class="m-3 cursor-pointer p-2 rounded-sm text-center  text-white uppercase font-bold" (click)="loadCategory(category.id)" *ngFor="let category of categories;">
     {{ category.title }}
   </div>

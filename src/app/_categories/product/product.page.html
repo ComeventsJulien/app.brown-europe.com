@@ -1,6 +1,6 @@
 <ion-header [translucent]="true"></ion-header>
 <ion-content [fullscreen]="true" *ngIf="product">
-    <div class="min-h-screen bg-black">
+    <div class="min-h-screen bg-{{ settings['secondaryColor'] }}">
         <div class="container mx-auto flex flex-col justify-center items-center">
             <div class="mt-5">
                 <h1 class="tracking-widest font-bold text-3xl text-white uppercase">{{ product.title }}</h1>
@@ -19,13 +19,13 @@
             </div>
         </div>
         <div class="fixed top-0 left-0 z-50 cursor-pointer">
-            <div class="bg-black h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
+            <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white" (click)="menu.presentModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </div>
-            <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+            <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
                 <ion-back-button class="text-2xl" defaultHref="/home">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="w-5" viewBox="0 0 24 24"
                         stroke="currentColor">
@@ -35,8 +35,8 @@
             </div>
         </div>
         <div class="fixed top-0 right-0 z-50 cursor-pointer" [routerLink]="['/home']">
-            <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
-                <div class="bg-black h-8 w-10 flex justify-center items-center text-white">
+            <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
+                <div class="bg-{{ settings['secondaryColor'] }} h-8 w-10 flex justify-center items-center text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-5" fill="none" viewBox="0 0 24 24"
                         stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

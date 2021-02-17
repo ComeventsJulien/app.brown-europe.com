@@ -1,3 +1,7 @@
 export const environment = {
-  production: true
+  production: false,
+  apiBase   : 'http://localhost:8000',
+  apiFolder : '/api',
+  uploadFileFolder: '/uploads/images/',
+  storageKey: 'base'
 };

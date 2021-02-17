@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ViewWillEnter, IonSlides } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { LocaleService } from '../services/locale.service';
+import { DataService } from '../services/data.service';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuComponent } from '../menu/menu.component';
 
@@ -13,6 +13,7 @@ import { MenuComponent } from '../menu/menu.component';
 })
 export class SlidersPage implements ViewWillEnter {
   @ViewChild (IonSlides) protected slider: IonSlides;
+  settings = [];
   title = '';
   sliders:Array<any> = [];
   slideOpts = {
@@ -82,12 +83,13 @@ export class SlidersPage implements ViewWillEnter {
     }
   }
 
-  constructor(public menu: MenuComponent, private sanitizer:DomSanitizer, private localeService: LocaleService) {
+  constructor(public menu: MenuComponent, private sanitizer:DomSanitizer, private dataService: DataService) {
   }
 
   async ionViewWillEnter() {
-    this.title = await this.localeService.getGUIText('APP_SLIDERS_TITLE');
-    this.sliders = await this.localeService.getSliders();
+    this.settings = await this.dataService.getSettings();
+    this.title = await this.dataService.getGUIText('APP_SLIDERS_TITLE');
+    this.sliders = await this.dataService.getSliders();
     for (let slider of this.sliders) {
       slider.image = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(slider.image));
     }

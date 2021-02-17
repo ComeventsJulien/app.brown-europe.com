@@ -66,7 +66,7 @@ export class ApiService {
     );
   }
 
-  getLocale(forceRefresh: boolean = false): Observable<any[]> {
+  getLocales(forceRefresh: boolean = false): Observable<any[]> {
     return this.http.get(`${env.apiBase}${env.apiFolder}/locales?visible=true`).pipe(
       map(res => res['hydra:member'])
     );

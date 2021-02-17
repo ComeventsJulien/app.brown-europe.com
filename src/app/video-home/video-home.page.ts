@@ -1,6 +1,6 @@
 import {Component, OnInit, Sanitizer} from '@angular/core';
 import { Router } from '@angular/router';
-import {LocaleService} from '../services/locale.service';
+import {DataService} from '../services/data.service';
 import {HttpClient} from '@angular/common/http';
 import {ViewWillEnter} from '@ionic/angular';
 import {Observable} from 'rxjs';
@@ -13,9 +13,8 @@ const STORE_URL = 'https://oe2vlafafp.preview.infomaniak.website/uploads/images/
   styleUrls: ['./video-home.page.scss'],
 })
 export class VideoHomePage implements ViewWillEnter {
-
   video: any;
-  constructor(private router: Router, private localeService : LocaleService, private http: HttpClient, private sanitizer:DomSanitizer) { }
+  constructor(private router: Router, private dataService : DataService, private http: HttpClient, private sanitizer:DomSanitizer) { }
 
   loadHome(){
     let audioPlayer = <HTMLVideoElement>document.getElementById('home-video')
@@ -24,13 +23,13 @@ export class VideoHomePage implements ViewWillEnter {
   }
 
   async ionViewWillEnter() {
-    let localVideo = await this.localeService.getLocalData('home_video')
+    let localVideo = await this.dataService.getLocalData('home_video')
     if(localVideo){
       this.video = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(localVideo));
     }else{
       await this.getVideo(STORE_URL + 'home.mp4').then(async (item: Observable<string>) => {
         await item.forEach(blob => {
-          this.localeService.setLocalData('home_video', blob)
+          this.dataService.setLocalData('home_video', blob)
           this.video = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(blob));
         });
       });

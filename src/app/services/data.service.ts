@@ -6,11 +6,23 @@ import { ApiService } from '../services/api.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LocaleService {
+export class DataService {
   constructor(
     private storage: Storage,
     private apiService: ApiService
   ) { }
+
+  async clear() {
+    return await this.storage.clear();
+  }
+
+  async setCurrentLanguage(code) {
+    return await this.setLocalData('currentLanguage', code);
+  }
+
+  async getCurrentLanguage() {
+    return await this.getLocalData('currentLanguage');
+  }
 
   async loadFromAPI() {
     return new Promise((resolve) => {
@@ -55,10 +67,10 @@ export class LocaleService {
       });
 
       this.apiService.getSettings().subscribe(async (data) => {
-        await this.setLocalData('settings', data);
+        await this.setLocalData('settings', data[0]);
       });
 
-      this.apiService.getLocale().subscribe(async (data) => {
+      this.apiService.getLocales().subscribe(async (data) => {
         await this.setLocalData('locales', data);
       });
 
@@ -70,28 +82,12 @@ export class LocaleService {
     })
   }
 
-  async setLocalData(key: string, data: any) {
-    this.storage.set(`${env.storageKey}-${key}`, data);
-  }
-
-  async getLocalData(key: string) {
-    return this.storage.get(`${env.storageKey}-${key}`);
-  }
-
-  async clear() {
-    return await this.storage.clear();
-  }
-
   async getLocales() {
     return await this.getLocalData('locales');
   }
 
-  async getLocale() {
-    return await this.getLocalData('locale');
-  }
-
   async getAbout() {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let about = await this.getLocalData('about');
     if (locale != 'fr') {
       about = about.map(item => {
@@ -104,7 +100,7 @@ export class LocaleService {
   }
 
   async getAboutOne(id) {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let about = await this.getLocalData('about');
     let aboutOne = about[about.findIndex(item => item.id == id)];
 
@@ -126,7 +122,7 @@ export class LocaleService {
   }
 
   async getPartnerCategories() {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let partnerCategories = await this.getLocalData('partner_categories');
 
     if (locale != 'fr') {
@@ -140,7 +136,7 @@ export class LocaleService {
   }
 
   async getPartnerCategoryOne(id) {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let partnerCategories = await this.getLocalData('partner_categories');
     let partnerCategory = partnerCategories[partnerCategories.findIndex(item => item.id == id)];
 
@@ -153,7 +149,7 @@ export class LocaleService {
   }
 
   async getPartners() {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let partners = await this.getLocalData('partners');
     
     if (locale != 'fr') {
@@ -167,7 +163,7 @@ export class LocaleService {
   }
 
   async getPartnerOne(id) {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let partners = await this.getLocalData('partners');
     let partner = partners[partners.findIndex(item => item.id == id)];
 
@@ -180,7 +176,7 @@ export class LocaleService {
   }
 
   async getCategories() {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let categories = await this.getLocalData('categories');
 
     if (locale != 'fr') {
@@ -194,7 +190,7 @@ export class LocaleService {
   }
 
   async getCategoryOne(id) {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let categories = await this.getLocalData('categories');
     let category = categories[categories.findIndex(item => item.id == id)];
   
@@ -207,7 +203,7 @@ export class LocaleService {
   }
 
   async getSubCategories() {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let subCategories = await this.getLocalData('sub_categories');
 
     if (locale != 'fr') {
@@ -221,7 +217,7 @@ export class LocaleService {
   }
 
   async getSubCategoryOne(id) {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let subCategories = await this.getLocalData('sub_categories');
     let subCategory = subCategories[subCategories.findIndex(item => item.id == id)];
 
@@ -234,7 +230,7 @@ export class LocaleService {
   }
 
   async getProducts() {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let products = await this.getLocalData('products');
 
     if (locale != 'fr') {
@@ -248,7 +244,7 @@ export class LocaleService {
   }
 
   async getProductOne(id) {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let products = await this.getLocalData('products');
     let product = products[products.findIndex(item => item.id == id)];
 
@@ -265,7 +261,7 @@ export class LocaleService {
   }
 
   async getGUIS() {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let guis = await this.getLocalData('guis');
 
     if (locale != 'fr') {
@@ -279,7 +275,7 @@ export class LocaleService {
   }
 
   async getGUIText(name) {
-    let locale = await this.getLocale();
+    let locale = await this.getCurrentLanguage();
     let guis = await this.getLocalData('guis');
     let gui = guis[guis.findIndex(item => item.name == name)];
 
@@ -289,5 +285,17 @@ export class LocaleService {
     }
 
     return gui.text;
+  }
+
+  async getSettings() {
+    return await this.getLocalData('settings');
+  }
+
+  async setLocalData(key: string, data: any) {
+    this.storage.set(`${env.storageKey}-${key}`, data);
+  }
+
+  async getLocalData(key: string) {
+    return this.storage.get(`${env.storageKey}-${key}`);
   }
 }
