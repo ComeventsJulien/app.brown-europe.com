@@ -31,6 +31,10 @@ export const environment = {
 };
 ```
 
+Pour rajouter une couleur qui n'est pas la palette de tailwind, il faut:
+ - Editer le fichier tailwind.config.js (brown_europe_primary, brown_europe_secondary)
+ - Lancer ngtw build
+
 ### Installation en mode de production prod
 
 Les configurations des différents textes se trouvent dans ```src/assets/i18n/``` et le langage correspondant : fr.json ou en.json, suivant le multilangage souhaité.

@@ -3,7 +3,7 @@
   <div class="min-h-screen bg-{{ settings['secondaryColor'] }} pb-32">
     <div class="container mx-auto py-14">
       <div>
-        <h1 class="tracking-widest font-bold text-5xl text-{{ settings['primaryColor'] }} mb-5 uppercase pt-10">{{subCategory.title}}</h1>
+        <h1 class="tracking-widest font-bold text-5xl text-white mb-5 uppercase pt-10">{{subCategory.title}}</h1>
         <hr class="border border-or my-3 mb-8">
         <div class="flex justify-start w-full mb-8" *ngIf="subCategory.sound">
           <audio controls [src]="subCategory.sound"></audio>
@@ -13,8 +13,7 @@
       <div class="flex flex-wrap justify-center container mx-auto">
         <a *ngFor="let product of products; let i = index" (click)="loadProduct(product.id)"
           class="cursor-pointer w-full lg:w-1/4 text-center flex flex-col items-center hover:bg-{{ settings['primaryColor'] }} hover:text-white  group transition duration-500 ease-in-out">
-          <p class="text-3xl font-serif lg:text-6xl px-2 text-{{ settings['primaryColor'] }} group-hover:text-white">{{ i+1 }}</p>
-          <p class="text-xs lg:text-xl uppercase mt-1 mb-3 text-white group-hover:text-white">{{ product.title }}</p>
+          <p class="text-xs p-6 lg:text-xl uppercase mt-1 mb-3 text-white group-hover:text-white">{{ product.title }}</p>
         </a>
       </div>
     </div>

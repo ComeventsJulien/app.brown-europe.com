@@ -1,6 +1,12 @@
 module.exports = {
   purge: [],
   theme: {
+    colors: {
+      white: 'white',
+      blue: '#0C9BD7',
+      brown_europe_primary: '#0C9BD7',
+      brown_europe_secondary: '#3C3A3B'
+    },
     extend: {
       fontSize:{
         'pdf' : '10rem'

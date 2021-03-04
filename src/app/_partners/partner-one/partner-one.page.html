@@ -12,7 +12,7 @@
         </div>
         <div class="text-white text-lg" [innerHTML]="partner.description"></div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
         <a *ngFor="let res of partnerResources" class="flex justify-center items-center mt-5">
           <img [src]="res.link" class="w-auto h-64 object-cover" alt="">
         </a>

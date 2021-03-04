@@ -2,22 +2,16 @@
 <ion-content [fullscreen]="true">
   <div class="min-h-screen bg-{{ settings['secondaryColor'] }} flex flex-col justify-center items-center">
     <div class="flex flex-col items-center justify-center">
-      <h1 class="tracking-widest font-bold text-3xl lg:text-5xl text-white uppercase text-center">{{ title }}</h1>
-    </div>
-    <div class="w-full h-10 container mx-auto z-0 my-2">
-      <div class="bg-red-700 h-4"></div>
-      <div class="bg-gray-300 h-4"></div>
-      <div class="bg-red-700 h-4"></div>
+      <h1 class="tracking-widest font-bold text-3xl lg:text-5xl text-white font-serif uppercase text-center">Brown Europe</h1>
     </div>
     <div class="mt-5 container mx-auto flex flex-wrap justify-center z-50">
       <a *ngFor="let item of about" (click)="loadItem(item.id)"
-        class="w-full md:w-1/3 cursor-pointer p-2 text-center text-white item relative flex flex-col items-center justify-center hover:bg-{{ settings['primaryColor'] }} hover:text-white  group transition duration-500 ease-in-out">
-        <p class="text-xl uppercase text-white group-hover:text-white">{{ item.title }}</p>
+        class="w-full md:w-1/3 cursor-pointer text-center text-white item relative flex flex-col items-center justify-center hover:bg-{{ settings['primaryColor'] }} hover:text-white  group transition duration-500 ease-in-out">
+        <p class="text-xl uppercase p-10 text-white group-hover:text-white">{{ item.title }}</p>
       </a>
-      <a (click)="loadSliders()"
-        class="w-full md:w-1/3 cursor-pointer p-2 text-center text-white item relative flex flex-col items-center justify-center hover:bg-{{ settings['primaryColor'] }} hover:text-white  group transition duration-500 ease-in-out">
+      <!--<a (click)="loadSliders()" *ngIf="settings.slider" class="w-full md:w-1/3 cursor-pointer p-2 text-center text-white item relative flex flex-col items-center justify-center hover:bg-{{ settings['primaryColor'] }} hover:text-white  group transition duration-500 ease-in-out">
         <p class="text-xl uppercase text-white group-hover:text-white">{{ slidersTitle }}</p>
-      </a>
+      </a>-->
     </div>
   </div>
   <div class="fixed top-0 left-0 z-50 cursor-pointer">

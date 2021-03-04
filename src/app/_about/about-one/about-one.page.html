@@ -4,7 +4,7 @@
     <div class="container mx-auto">
       <h1 class="font-bold text-3xl lg:text-5xl text-white uppercase text-center font-serif mb-5">{{item.title}}</h1>
       <div class="text-lg text-white text-center mb-5" [innerHtml]="item.description"></div>
-      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+      <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-5">
         <a *ngFor="let res of itemResources" class="w-auto flex justify-center items-center">
           <img [src]="res.link" class="w-full object-cover" alt="" *ngIf="res.type.name=='IMAGE'">
           <video controls width="100%" class="w-full h-64 object-cover" *ngIf="res.type.name=='VIDEO'">

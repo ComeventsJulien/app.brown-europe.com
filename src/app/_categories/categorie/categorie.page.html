@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true" *ngIf="category">
   <div class="min-h-screen bg-{{ settings['secondaryColor'] }} flex flex-col justify-center items-center">
     <div class="flex flex-col items-center justify-center container mx-auto text-center">
-      <h1 class="font-bold text-3xl lg:text-5xl uppercase text-center font-serif text-{{ settings['primaryColor'] }}">{{ category.title }}</h1>
+      <h1 class="font-bold text-3xl lg:text-5xl uppercase text-white text-center font-serif">{{ category.title }}</h1>
       <div class="text-lg lg:text-2xl text-white text-center" [innerHtml]="category.description"></div>
       <div class="mt-5" *ngIf="category.sound">
         <audio controls [src]="category.sound" id="audio"></audio>
@@ -11,8 +11,7 @@
     <div class="flex flex-wrap justify-center mt-10 container mx-auto">
       <a *ngFor="let subcategory of subCategories; let i = index" (click)="loadItem(subcategory.id)"
         class="cursor-pointer px-2 w-full lg:w-1/4 text-center  flex flex-col items-center hover:bg-{{ settings['primaryColor'] }} hover:text-white group transition duration-500 ease-in-out">
-        <p class="text-3xl font-serif lg:text-6xl px-2 text-{{ settings['primaryColor'] }} group-hover:text-white">{{ i+1 }}</p>
-        <p class="text-lg uppercase mt-1 mb-3 text-white group-hover:text-white">{{ subcategory.title }}</p>
+        <p class="text-lg uppercase mt-1 p-10 mb-3 text-white group-hover:text-white">{{ subcategory.title }}</p>
       </a>
     </div>
   </div>
