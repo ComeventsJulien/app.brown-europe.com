@@ -5,6 +5,9 @@
       <img src="" class="pb-5 pr-2 z-10 hidden lg:block lg:w-32 h-auto" alt="">
       <h1 class="font-bold text-3xl lg:text-5xl text-white uppercase text-center font-serif pb-5">{{ title }}</h1>
     </div>
+    <div class="w-2/12">
+      <hr class="border border-blue my-3 mb-8 w-full">
+    </div>
     <div class="flex flex-wrap justify-center container mx-auto">
       <a *ngFor="let category of categories; let i = index" (click)="loadItem(category.id)"
         class="cursor-pointer w-full lg:w-1/4 text-center flex flex-col items-center hover:bg-{{ settings['primaryColor'] }} hover:text-white  group transition duration-500 ease-in-out">
